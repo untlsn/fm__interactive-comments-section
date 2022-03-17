@@ -29,5 +29,6 @@ module.exports = {
         max: 3,
       },
     }],
+    'no-console': 'warn',
   },
 };

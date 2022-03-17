@@ -14,16 +14,16 @@
 
 Think about
 
-- [ ] PWA
-- [ ] Pinia Store
+- [x] PWA
+- [x] Pinia Store
 
 Change this before use
 
-- [ ] Change the author name in `LICENSE`
-- [ ] Change the title in `App.vue`
+- [x] Change the author name in `LICENSE`
+- [x] Change the title in `App.vue`
 - [ ] Change the hostname in `vite.config.ts`
 - [ ] Change the favicon in `public`
-- [ ] Clean up the READMEs and remove routes
+- [x] Clean up the READMEs and remove routes
 - [ ] Extend tailwind config
 
 Change this after use
