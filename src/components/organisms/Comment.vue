@@ -18,10 +18,11 @@ const emit = defineEmits<{
 const changeScore = (value: 'plus'|'minus') => {
   emit('scoreChange', value);
 };
+
 </script>
 
 <template>
-  <article class="max-w-200 bg-white p-8 rounded flex gap-4">
+  <article v-bind="$attrs" class="max-w-200 bg-white p-8 rounded flex gap-4">
     <div class="flex flex-col bg-[#F5F5FD] text-[#5457B6] font-bold w-20 h-24 items-center justify-center rounded-xl">
       <button class="py-3 px-2" @click="changeScore('plus')">
         <img src="/images/icon-plus.svg" alt="">
@@ -48,4 +49,5 @@ const changeScore = (value: 'plus'|'minus') => {
       <p>{{ content }}</p>
     </div>
   </article>
+  <slot />
 </template>
