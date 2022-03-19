@@ -14,47 +14,15 @@ fetch('/data.json')
     commentsStore.addComments(res.comments);
     userStore.$patch(res.currentUser);
   });
-
-
-
-
-const changeScore = (id: number, value: PlusMinus) => {
-  const comment = commentsStore.comment(id);
-  if (!comment) return;
-
-  const old = userStore.scoreChanges[id] || 0;
-  let newVal = 0;
-
-  if (!(old == 1 && value == PlusMinus.plus || old == -1 && value == PlusMinus.minus)) {
-    newVal = value == 'plus' ? 1 : -1;
-  }
-
-  userStore.scoreChanges[id] = newVal;
-  comment.score = comment.score - old + newVal;
-};
 </script>
 
 <template>
   <div class="flex flex-col items-center justify-center min-h-screen bg-[#F5F6FA] space-y-6">
     <img class="absolute top-0 right-0" :src="userStore.image.webp" alt="your avatar">
-    <Comment
-      v-for="comment in commentsStore.comments"
-      :key="comment.id"
-      v-bind="comment"
-      :score-change="plusMinusFromNumber(userStore.scoreChanges[comment.id])"
-      @score-change="val => changeScore(comment.id, val)"
-    >
-      <div
-        v-for="subcomment in comment.replies"
-        :key="subcomment.id"
-        class="pl-8 flex h-42 gap-8 max-w-200"
-      >
+    <Comment v-for="comment in commentsStore.comments" :key="comment.id" v-bind="comment">
+      <div v-for="subcomment in comment.replies" :key="subcomment.id" class="pl-8 flex h-42 gap-8 max-w-200">
         <hr class="w-1 h-full border-none bg-black opacity-10">
-        <Comment 
-          v-bind="subcomment"
-          :score-change="plusMinusFromNumber(userStore.scoreChanges[subcomment.id])"
-          @score-change="val => changeScore(subcomment.id, val)"
-        />
+        <Comment v-bind="subcomment" />
       </div>
     </Comment>
   </div>

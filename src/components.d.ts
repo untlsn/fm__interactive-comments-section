@@ -5,10 +5,11 @@
 declare module 'vue' {
   export interface GlobalComponents {
     Comment: typeof import('./components/organisms/Comment.vue')['default']
-    CommentButtons: typeof import('./components/atoms/CommentButtons.vue')['default']
+    CommentButtons: typeof import('./components/molecules/CommentButtons.vue')['default']
+    ImageButton: typeof import('./components/atoms/ImageButton.vue')['default']
     Minus: typeof import('./components/icons/Minus.vue')['default']
-    Plus: typeof import('./components/atoms/Plus.vue')['default']
-    PlusMinusButton: typeof import('./components/molecules/PlusMinusButton.vue')['default']
+    Plus: typeof import('./components/icons/Plus.vue')['default']
+    PlusMinusButton: typeof import('./components/atoms/PlusMinusButton.vue')['default']
   }
 }
 
