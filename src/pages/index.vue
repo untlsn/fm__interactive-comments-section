@@ -3,6 +3,7 @@ import { Data } from '~/types/data';
 import useComments from '~/store/useComments';
 import useUser from '~/store/useUser';
 import Comment from '~/components/organisms/Comment.vue';
+import PlusMinus, { plusMinusFromNumber } from '~/types/plusMinus';
 
 const commentsStore = useComments();
 const userStore = useUser();
@@ -17,14 +18,14 @@ fetch('/data.json')
 
 
 
-const changeScore = (id: number, value: 'plus'|'minus') => {
+const changeScore = (id: number, value: PlusMinus) => {
   const comment = commentsStore.comment(id);
   if (!comment) return;
 
   const old = userStore.scoreChanges[id] || 0;
   let newVal = 0;
 
-  if (!(old == 1 && value == 'plus' || old == -1 && value == 'minus')) {
+  if (!(old == 1 && value == PlusMinus.plus || old == -1 && value == PlusMinus.minus)) {
     newVal = value == 'plus' ? 1 : -1;
   }
 
@@ -40,6 +41,7 @@ const changeScore = (id: number, value: 'plus'|'minus') => {
       v-for="comment in commentsStore.comments"
       :key="comment.id"
       v-bind="comment"
+      :score-change="plusMinusFromNumber(userStore.scoreChanges[comment.id])"
       @score-change="val => changeScore(comment.id, val)"
     >
       <div
@@ -50,6 +52,7 @@ const changeScore = (id: number, value: 'plus'|'minus') => {
         <hr class="w-1 h-full border-none bg-black opacity-10">
         <Comment 
           v-bind="subcomment"
+          :score-change="plusMinusFromNumber(userStore.scoreChanges[subcomment.id])"
           @score-change="val => changeScore(subcomment.id, val)"
         />
       </div>

@@ -1,4 +1,3 @@
-import { objectToString } from '.pnpm/@vue+shared@3.2.31/node_modules/@vue/shared';
 import { defineStore } from 'pinia';
 import { Comment } from '~/types/data';
 

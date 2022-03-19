@@ -1,5 +1,6 @@
 <script lang="ts" setup="">
 import { Comment, User } from '~/types/data';
+import PlusMinus from '~/types/plusMinus';
 
 defineProps<{
   id: number,
@@ -9,13 +10,14 @@ defineProps<{
   user: User,
   replies?: Comment[]
   replyingTo?: string,
+  scoreChange: PlusMinus
 }>();
 
 const emit = defineEmits<{
-  (emit: 'scoreChange', value: 'plus'|'minus'): void
+  (emit: 'scoreChange', value: PlusMinus): void
 }>();
 
-const changeScore = (value: 'plus'|'minus') => {
+const changeScore = (value: PlusMinus) => {
   emit('scoreChange', value);
 };
 
@@ -24,13 +26,19 @@ const changeScore = (value: 'plus'|'minus') => {
 <template>
   <article v-bind="$attrs" class="max-w-200 bg-white p-8 rounded flex gap-4">
     <div class="flex flex-col bg-[#F5F5FD] text-[#5457B6] font-bold w-20 h-24 items-center justify-center rounded-xl">
-      <button class="py-3 px-2" @click="changeScore('plus')">
-        <img src="/images/icon-plus.svg" alt="">
-      </button>
+      <PlusMinusButton 
+        :selected="scoreChange == PlusMinus.plus" 
+        @click="changeScore(PlusMinus.plus)"
+      >
+        <Plus />
+      </PlusMinusButton>
       {{ score }}
-      <button class="py-3 px-2" @click="changeScore('minus')">
-        <img src="/images/icon-minus.svg" alt="">
-      </button>
+      <PlusMinusButton 
+        :selected="scoreChange == PlusMinus.minus" 
+        @click="changeScore(PlusMinus.minus)"
+      >
+        <Minus />
+      </PlusMinusButton>
     </div>
     <div>
       <header class="flex items-center gap-4">
