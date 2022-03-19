@@ -25,21 +25,7 @@ const changeScore = (value: PlusMinus) => {
 
 <template>
   <article v-bind="$attrs" class="max-w-200 bg-white p-8 rounded flex gap-4">
-    <div class="flex flex-col bg-[#F5F5FD] text-[#5457B6] font-bold w-20 h-24 items-center justify-center rounded-xl">
-      <PlusMinusButton 
-        :selected="scoreChange == PlusMinus.plus" 
-        @click="changeScore(PlusMinus.plus)"
-      >
-        <Plus />
-      </PlusMinusButton>
-      {{ score }}
-      <PlusMinusButton 
-        :selected="scoreChange == PlusMinus.minus" 
-        @click="changeScore(PlusMinus.minus)"
-      >
-        <Minus />
-      </PlusMinusButton>
-    </div>
+    <CommentButtons :score="score" :score-change="scoreChange" @change:score="changeScore" />
     <div>
       <header class="flex items-center gap-4">
         <img :src="user.image.webp" alt="avatar" class="h-8">

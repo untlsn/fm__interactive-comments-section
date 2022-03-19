@@ -7,7 +7,7 @@ declare module 'vue' {
     Comment: typeof import('./components/organisms/Comment.vue')['default']
     CommentButtons: typeof import('./components/atoms/CommentButtons.vue')['default']
     Minus: typeof import('./components/icons/Minus.vue')['default']
-    Plus: typeof import('./components/icons/Plus.vue')['default']
+    Plus: typeof import('./components/atoms/Plus.vue')['default']
     PlusMinusButton: typeof import('./components/molecules/PlusMinusButton.vue')['default']
   }
 }
