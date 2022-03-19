@@ -10,6 +10,7 @@ declare module 'vue' {
     Minus: typeof import('./components/icons/Minus.vue')['default']
     Plus: typeof import('./components/icons/Plus.vue')['default']
     PlusMinusButton: typeof import('./components/atoms/PlusMinusButton.vue')['default']
+    ReplyBar: typeof import('./components/organisms/ReplyBar.vue')['default']
   }
 }
 

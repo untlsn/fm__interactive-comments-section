@@ -7,7 +7,7 @@ const props = defineProps<{
 
 
 <template>
-  <button class="text-[#5457B6] flex items-center gap-2 font-bold capitalize hover:opacity-40">
+  <button class="text-main flex items-center gap-2 font-bold capitalize hover:opacity-40">
     <img v-bind="props">
     <slot />
   </button>

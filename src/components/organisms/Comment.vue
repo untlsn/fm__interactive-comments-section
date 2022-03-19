@@ -1,9 +1,8 @@
-<script lang="ts" setup="">
+<script lang="ts" setup>
 import initChangeScore from '~/helpers/initChangeScore';
-import useComments from '~/store/useComments';
 import useUser from '~/store/useUser';
 import { Comment, User } from '~/types/data';
-import PlusMinus, { plusMinusFromNumber } from '~/types/plusMinus';
+import { plusMinusFromNumber } from '~/types/plusMinus';
 
 const props = defineProps<{
   id: number,
@@ -22,6 +21,7 @@ const changeScore = initChangeScore(props.id);
 
 const scoreChange = computed(() => userStore.scoreChanges[props.id]);
 const itsYou = computed(() => props.user.username == userStore.username);
+const replying = ref(false);
 
 </script>
 
@@ -39,26 +39,32 @@ const itsYou = computed(() => props.user.username == userStore.username);
         <p class="text-[#313741] font-bold">
           {{ user.username }}
         </p>
-        <p v-if="itsYou" class="bg-[#5357B4] text-white text-sm px-2">
+        <p v-if="itsYou" class="bg-main text-white text-sm px-2 rounded">
           you
         </p>
         <p class="flex-1 opacity-50">
           {{ createdAt }}
         </p>
         <template v-if="itsYou">
-          <ImageButton src="/images/icon-delete.svg" alt="reply" class="text-[#ED6368]">
+          <ImageButton src="/images/icon-delete.svg" alt="delete" class="!text-warn">
             delete
           </ImageButton>
-          <ImageButton src="/images/icon-edit.svg" alt="reply">
+          <ImageButton src="/images/icon-edit.svg" alt="edit">
             edit
           </ImageButton>
         </template>
-        <ImageButton v-else src="/images/icon-reply.svg" alt="reply">
+        <ImageButton
+          v-else
+          src="/images/icon-reply.svg"
+          alt="reply"
+          @click="replying = !replying"
+        >
           reply
         </ImageButton>
       </header>
       <p>{{ content }}</p>
     </div>
   </article>
+  <ReplyBar v-if="replying" />
   <slot />
 </template>
